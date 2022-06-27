@@ -1,0 +1,36 @@
+<div class="header-img"></div>
+<form action="/action_page.php" #myForm="ngForm" (ngSubmit)="Link()" style="direction: rtl;">
+  <div class="section first-section">
+    <h2 class="title">תחומי התנדבות</h2>
+    <div class="row prograph">
+      <div class="col-6">
+        <h6>תחומים</h6>
+        <!-- <div *ngFor="let item of listDomain">
+          <select class="form-select form-control" (change)="selectDomain($event.target.value,item.domain)"
+            aria-label="Default select example">
+            <option selected>{{item.domain.description}}</option>
+            <option *ngFor="let item1 of item.volunteerDomain" [value]="item1.code_volunteering">{{item1.description}}
+            </option>
+          </select>
+        </div> -->
+        <div class="autocomplete" *ngFor="let item of listDomain">
+          <h6>{{item.domain.description}}</h6>
+          <div class="chips-input-container form-select form-control" (click)="suggest(item)">
+            <div *ngFor="let volunteering of selectedVolunteerings">
+              <span class="user-chip" *ngIf="item.domain.code_domain==volunteering.code_domain">
+                {{volunteering.description}}</span>
+            </div>
+          </div>
+          <div class="autocomplete-items" *ngIf="item.isShow">
+            <div *ngFor="let item1 of item.volunteerDomain"
+              [ngClass]="isVolunteerongSelected(item1) ? 'selected-suggestion' : ''"
+              (click)="selectVolunteering(item1)">{{ item1.description }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="button-wapper">
+      <button type="submit" class="btn btn-dark btn-perple btn-lg">אישור </button>
+    </div>
+  </div>
+</form>
